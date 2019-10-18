@@ -21,3 +21,22 @@ ul.cardapio-list li strong {
   color: #444;
   margin-bottom: 10px;
 }
+
+ul.cardapio-list li button.btn-modification {
+  border: 0;
+  border-radius: 2px;
+  width: 100%;
+  height: 42px;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  background: #f05a5b;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+
+ul.cardapio-list li button.btn-modification:hover{
+    background: #e14f50;
+  }

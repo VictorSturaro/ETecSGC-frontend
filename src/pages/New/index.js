@@ -8,6 +8,7 @@ export default function New() {
   const [thumbnail, setThumbnail] = useState(null);
   const [descricao, setDescricao] = useState('');
   const [ingredientes, setIngredientes] = useState('');
+  const [dia, setDia] = useState('');
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
@@ -42,6 +43,14 @@ export default function New() {
       placeholder="Ingredientes do prato"
       value={ingredientes}
       onChange={event => setIngredientes(event.target.value)}
+      />
+
+      <label htmlFor="dia">DIA DA SEMANA *</label>
+      <input 
+      id="dia"
+      placeholder="Dia da semana"
+      value={dia}
+      onChange={event => setDia(event.target.value)}
       />
 
       <button type="submit" className="btn">Editar</button>

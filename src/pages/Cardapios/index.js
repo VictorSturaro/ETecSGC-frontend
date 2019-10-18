@@ -14,6 +14,7 @@ export default function Cardapios() {
         headers: { user_id }
       });
 
+      console.log(response);
       setCardapios(response.data);
     }
 
@@ -23,42 +24,27 @@ export default function Cardapios() {
   return (
     <>
       <ul className="cardapio-list">
-          <li>
-            <header />
-            <strong>Segunda-feira</strong>
+        {cardapios.map(cardapio => (
+          <li key={cardapio._id}>
+            <header style={{ backgroundImage: `url(${cardapio.thumbnail_url})` }} />
+            <strong>{cardapio.dia}</strong>
+            <table>
+              <tr>
+                <td>
+                 <button className="btn-modification">Editar</button>
+                </td>
+                <td>
+                 <button className="btn-modification">Excluir</button>
+                </td>
+              </tr>
+            </table>
           </li>
-          <Link to="/new">
-            <button className="btn">Editar</button>
-          </Link>
-          <li>
-            <header />
-            <strong>Terça-feira</strong>
-          </li>
-          <Link to="/new">
-            <button className="btn">Editar</button>
-          </Link>
-          <li>
-            <header />
-            <strong>Quarta-feira</strong>
-          </li>
-          <Link to="/new">
-            <button className="btn">Editar</button>
-          </Link>
-          <li>
-            <header />
-            <strong>Quinta-feira</strong>
-          </li>
-          <Link to="/new">
-            <button className="btn">Editar</button>
-          </Link>
-          <li>
-            <header />
-            <strong>Sexta-feira</strong>
-          </li>
-          <Link to="/new">
-            <button className="btn">Editar</button>
-          </Link>
+        ))}
       </ul>
+
+      <Link to="/new">
+        <button className="btn">Novo Cardápio</button>
+      </Link>
     </>
   )
 }
