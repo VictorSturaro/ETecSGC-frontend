@@ -23,28 +23,26 @@ export default function Cardapios() {
 
   return (
     <>
-      <ul className="cardapio-list">
-        {cardapios.map(cardapio => (
-          <li key={cardapio._id}>
-            <header style={{ backgroundImage: `url(${cardapio.thumbnail_url})` }} />
-            <strong>{cardapio.dia}</strong>
-            <table>
-              <tr>
-                <td>
-                 <button className="btn-modification">Editar</button>
-                </td>
-                <td>
-                 <button className="btn-modification">Excluir</button>
-                </td>
-              </tr>
-            </table>
-          </li>
-        ))}
-      </ul>
-
-      <Link to="/new">
-        <button className="btn">Novo Cardápio</button>
-      </Link>
+        <ul className="cardapio-list"> 
+            {cardapios.map(cardapio => (
+                <li key={cardapio._id}>
+                    <strong>{cardapio.dia}</strong>
+                    <header style={{ backgroundImage: `url(${cardapio.thumbnail_url})` }} />
+                    <h1>{cardapio.descricao}</h1>
+                    <strong>{cardapio.ingredientes}</strong>
+                    <hr></hr>
+                </li>
+            ))}
+        </ul>
+        <Link to="/editar">
+          <button className='btnEditar'>Editar</button>
+        </Link>
+        <Link to="/new">
+          <button className='btnEditar'>Cadastrar</button>
+        </Link>
+        <Link to="/contagem">
+          <button className='btnEditar'>Contagem</button>
+        </Link>
     </>
   )
 }

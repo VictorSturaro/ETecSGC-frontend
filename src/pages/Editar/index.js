@@ -3,30 +3,30 @@ import api from '../../services/api';
 
 import camera from '../../assets/camera.svg';
 
-import './styles.css';
-
-export default function New({ history }) {
+export default function Editar({ history }) {
   const [thumbnail, setThumbnail] = useState(null);
-  const [descricao, setDescricao] = useState('');
-  const [ingredientes, setIngredientes] = useState('');
-  const [dia, setDia] = useState('');
+  const [desc, setDesc] = useState('');
+  const [dia_novo, setDia_novo] = useState('');
+  const [dia_alterar, setDia_alterar] = useState('');
+  const [ing, setIng] = useState('');
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
   }, [thumbnail])
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event){
     event.preventDefault();
 
     const data = new FormData();
     const user_id = localStorage.getItem('User');
 
     data.append('thumbnail', thumbnail);
-    data.append('descricao', descricao);
-    data.append('ingredientes', ingredientes);
-    data.append('dia', dia);
+    data.append('desc', desc);
+    data.append('dia_novo', dia_novo);
+    data.append('dia_alterar', dia_alterar);
+    data.append('ing', ing);
 
-    await api.post('/cardapios', data, {
+    await api.post('/editar', data, {
       headers: { user_id }
     })
 
@@ -35,6 +35,15 @@ export default function New({ history }) {
 
   return (
     <form onSubmit={handleSubmit}>
+
+      <label htmlFor="dia_alterar">DIA QUE SERÁ ALTERADO *</label>
+      <input 
+      id="dia_alterar"
+      placeholder="Qual o dia da semana será alterado?"
+      value={dia_alterar}
+      onChange={event => setDia_alterar(event.target.value)}
+      />
+
       <label 
         id="thumbnail" 
         style={{ backgroundImage: `url(${preview})` }}
@@ -46,29 +55,21 @@ export default function New({ history }) {
 
       <label htmlFor="descricao">DESCRIÇÃO *</label>
       <input 
-      id="descricao"
+      id="desc"
       placeholder="Descrição do prato"
-      value={descricao}
-      onChange={event => setDescricao(event.target.value)}
+      value={desc}
+      onChange={event => setDesc(event.target.value)}
       />
 
       <label htmlFor="ingredientes">INGREDIENTES *</label>
       <input 
-      id="ingredientes"
+      id="ing"
       placeholder="Ingredientes do prato"
-      value={ingredientes}
-      onChange={event => setIngredientes(event.target.value)}
+      value={ing}
+      onChange={event => setIng(event.target.value)}
       />
 
-      <label htmlFor="dia">DIA DA SEMANA *</label>
-      <input 
-      id="dia"
-      placeholder="Dia da semana"
-      value={dia}
-      onChange={event => setDia(event.target.value)}
-      />
-
-      <button type="submit" className="btn">Criar</button>
+      <button type="submit" className="btn">Editar</button>
     </form>
   )
 }
